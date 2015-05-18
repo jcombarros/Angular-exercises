@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html ng-app="">
+<head>
+	<title>First Page</title>
+</head>
+<body ng-init="people=['John Smith', 'John Doe']">
+	<label>Name:</label>
+	<input type="text" ng-model="name" />
+	<script src="angular.js"></script>
+	<br/>
+	<label>People:</label>
+	<ul>
+		<li ng-repeat="person in people"> 
+			{{ person }}
+		</li>
+		<li>{{ name }}</li>
+	</ul>
+</body>
+</html>

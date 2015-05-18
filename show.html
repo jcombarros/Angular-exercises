@@ -1,0 +1,72 @@
+<html ng-app="myApp">
+<head>
+	<title>Show</title>
+	<style>
+		.error {
+			background-color: red;
+		}
+
+		.warning {
+			background-color: yellow;
+		}
+
+		.selected {
+			background-color: green;
+		}
+	</style>
+</head>
+<body ng-controller="showController">
+	<button ng-click="toggleMenu()">Toggle</button>
+	<div ng-show="showMenu">
+		<p>Hellow World</p>
+	</div>
+	<br/>
+	<div>
+		<button ng-click="showError()">Error</button>
+		<button ng-click="showWarning()">Warning</button>
+		<p ng-class='{error: isError, warning: isWarning}'>	{{messageText}}</p>
+	</div>
+	<br/>
+	<div>
+		<table border="1">
+			<tr ng-repeat="item in items" ng-click="selectItem($index)" ng-class='{selected: $index == selectedRow}'>
+				<td>{{item}}</td>
+			</tr>
+		</table>
+	</div>
+	<script src="angular.js"></script>
+	<script>
+		var app = angular.module('myApp', []);
+        app.controller('showController', 
+        	function ($scope) {
+        		$scope.showMenu = false;
+        		$scope.toggleMenu = function (){
+        			$scope.showMenu = !$scope.showMenu;
+        		};
+
+        		$scope.isError = false;
+	        	$scope.isWarning = false;
+
+	        	$scope.showError = function(){
+	        		$scope.isError = true;
+	        		$scope.isWarning = false;
+	        		$scope.messageText = "An error";
+	        	};
+
+	        	$scope.showWarning = function(){
+	        		$scope.isError = false;
+	        		$scope.isWarning = true;
+	        		$scope.messageText = "A warning";
+	        	};
+
+	        	$scope.items = ['Item1', 'Item2', 'Item3'];
+
+	        	$scope.selectItem = function(row){
+	        		$scope.selectedRow = row;
+	        	};
+
+        	}
+        );
+     </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<html ng-app="myApp">
+<head>
+	<title>Page using inputs</title>
+</head>
+<body ng-controller="inputController">
+	<form ng-submit="finish()">
+		<input type="checkbox" ng-model="myCheck">
+		<br/>
+		<input type="text" ng-change="calculate()"
+			ng-model="price">
+		{{priceCurrency}}
+		<br/>
+		<button>Send</button>
+	</form>
+	<button ng-click="reset()">Reset</button>
+	<script src="angular.js"></script>
+	<script>
+		var app = angular.module('myApp', []);
+        app.controller('inputController', 
+        	function ($scope) {
+            	$scope.myCheck = true;
+            	$scope.price = 5;
+
+            	$scope.finish = function(){
+            		alert($scope.priceCurrency);
+            	};
+
+            	$scope.reset = function(){
+            		$scope.myCheck = false;
+            		$scope.price = '';
+            	};
+
+            	$scope.calculate = function(){
+            		$scope.priceCurrency = $scope.price + " euros";
+            	};
+
+            	//ng-change solo afecta a cambios desde la vista.
+            	//usando $watch atamos cualquier cambio, sea desde la vista o desde el server
+            	calculateInit = function(){
+            		$scope.priceCurrency = $scope.price + " euros";
+            	}
+            	$scope.$watch('price', calculateInit);
+        	}
+        );
+	</script>
+</body>
+</html>

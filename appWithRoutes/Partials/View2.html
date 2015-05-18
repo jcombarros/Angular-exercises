@@ -1,0 +1,13 @@
+<div>
+	<h2>View2</h2>
+	<label>Name:</label>
+	<input type="text" ng-model="city" />
+	<br/>
+	<label>Customers:</label>
+	<ul>
+		<li ng-repeat="cust in customers  | filter:city | orderBy:'city'"> 
+			{{ cust.name }} - {{cust.city | uppercase}}
+		</li>
+	</ul>
+	<a href="#/">View1</a>
+</div>
